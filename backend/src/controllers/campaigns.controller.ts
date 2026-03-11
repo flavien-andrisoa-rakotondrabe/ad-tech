@@ -32,8 +32,6 @@ export const getCampaignById = async (req: Request, res: Response) => {
 // Create Campaign
 export const createCampaign = async (req: Request, res: Response) => {
   try {
-    console.log(req);
-
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       res.status(400).json({ errors: errors.array() });

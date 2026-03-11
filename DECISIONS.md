@@ -50,4 +50,4 @@ Pour éviter de saturer un utilisateur avec la même publicité, j'ai prévu dan
 
 ## Présentation Vidéo
 
-- Lien Loom : ()[https://]
+- Lien Loom : (https://www.loom.com/share/32323e2d235643d0b86de11a9f8ad8f0)[https://www.loom.com/share/32323e2d235643d0b86de11a9f8ad8f0]
