@@ -12,10 +12,11 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { getCampaigns } from "@/services/campaign.service";
+import { getCampaigns, getStats } from "@/services/campaign.service";
 
 export default async function LandingPage() {
   const res = await getCampaigns();
+  const stats = await getStats();
 
   return (
     <div className="container mx-auto max-w-7xl py-10 space-y-8">
@@ -30,16 +31,6 @@ export default async function LandingPage() {
 
         <div className="flex gap-3">
           <Button
-            asChild
-            size={"lg"}
-            variant="outline"
-            className="h-12 px-4 rounded-lg text-lg"
-          >
-            <Link href="/dashboard">
-              <LayoutDashboard className="mr-2 size-4" /> Dashboard
-            </Link>
-          </Button>
-          <Button
             variant="secondary"
             asChild
             size={"lg"}
@@ -49,10 +40,29 @@ export default async function LandingPage() {
               <PlayCircle className="mr-1 size-5" /> Simulateur
             </Link>
           </Button>
+          <Button asChild size={"lg"} className="h-12 px-4 rounded-lg text-lg">
+            <Link href="/campaigns/new">
+              <PlusCircle className="mr-2 size-4" /> Créer une campagne
+            </Link>
+          </Button>
         </div>
       </div>
 
-      {/* Liste des Campagnes [cite: 54, 55] */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <StatCard title="Total Campagnes" value={stats.totalCampaigns} />
+        <StatCard
+          title="Actives"
+          value={stats.activeCampaigns}
+          color="text-green-600"
+        />
+        <StatCard
+          title="Impressions Totales"
+          value={stats.totalImpressions.toLocaleString()}
+        />
+        <StatCard title="Top Annonceur" value={stats.topAdvertiser} />
+      </div>
+
+      {/* Liste des Campagnes */}
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2 font-semibold text-2xl">
@@ -116,12 +126,29 @@ export default async function LandingPage() {
           </Table>
         </CardContent>
       </Card>
-
-      <Button asChild size={"lg"} className="h-12 px-4 rounded-lg text-lg">
-        <Link href="/campaigns/new">
-          <PlusCircle className="mr-2 size-4" /> Créer une campagne
-        </Link>
-      </Button>
     </div>
+  );
+}
+
+function StatCard({
+  title,
+  value,
+  color = "",
+}: {
+  title: string;
+  value: any;
+  color?: string;
+}) {
+  return (
+    <Card className="">
+      <CardHeader className="">
+        <CardTitle className="text-lg font-medium text-muted-foreground">
+          {title}
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className={`text-3xl font-bold ${color}`}>{value}</div>
+      </CardContent>
+    </Card>
   );
 }

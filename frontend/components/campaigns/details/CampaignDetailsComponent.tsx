@@ -14,6 +14,12 @@ export default async function CampaignDetailsComponent({ id }: PageProps) {
 
   return (
     <main className="max-w-4xl mx-auto p-8">
+      <Button asChild variant={"secondary"} className="mb-8 text-xl h-12 px-4">
+        <Link href="/" className="py-5">
+          <ArrowLeft className="mr-2 size-6" /> Retour
+        </Link>
+      </Button>
+
       <header className="border-b pb-6 mb-6">
         <h1 className="text-5xl font-semibold mb-2">{res.campaign.name}</h1>
         <p className="text-gray-500 text-lg">
@@ -56,12 +62,6 @@ export default async function CampaignDetailsComponent({ id }: PageProps) {
             ))}
           </div>
         </section>
-
-        <Button asChild className="mt-8 text-xl h-12 px-4">
-          <Link href="/" className="py-5">
-            <ArrowLeft className="mr-2 size-6" /> Revenir à la page d'acceuil
-          </Link>
-        </Button>
       </div>
     </main>
   );

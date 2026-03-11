@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { CampaignModel } from "@/models/campaign.model";
 
-// Statistiques [cite: 45, 47]
+// Statistiques
 export const getStats = async (_req: Request, res: Response) => {
   try {
     const stats = await CampaignModel.aggregate([
