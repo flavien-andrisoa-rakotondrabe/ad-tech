@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   PlayCircle,
   Globe,
@@ -28,13 +28,30 @@ import {
 } from "@/components/ui/select";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
-import { serveAd } from "@/services/campaign.service";
+import { getCountries, serveAd } from "@/services/campaign.service";
+
+import { CampaignInterface } from "@/types/campaign.type";
 
 export default function SimulatorComponent() {
+  const [countries, setCountries] = useState<string[]>([]);
   const [country, setCountry] = useState<string>("");
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<any>(null);
+  const [result, setResult] = useState<CampaignInterface | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      const res = await getCountries();
+
+      setCountries(res.countries);
+    })();
+  }, []);
+
+  useEffect(() => {
+    if (countries.length > 0) {
+      setCountry(countries[0]);
+    }
+  }, [countries]);
 
   const handleSimulate = async () => {
     if (!country) return;
@@ -44,8 +61,8 @@ export default function SimulatorComponent() {
     setResult(null);
 
     try {
-      const ad = await serveAd(country);
-      setResult(ad);
+      const res = await serveAd(country);
+      setResult(res.campaign);
 
       toast.success("Simulation effectuée.");
     } catch (err: any) {
@@ -86,23 +103,20 @@ export default function SimulatorComponent() {
               <label className="font-medium flex items-center gap-2">
                 <Globe className="h-4 w-4" /> Pays du visiteur
               </label>
-              <Select onValueChange={setCountry}>
-                <SelectTrigger className="h-10! px-4">
+              <Select value={country} onValueChange={setCountry}>
+                <SelectTrigger className="min-w-32 h-10! px-4">
                   <SelectValue placeholder="Sélectionnez un pays..." />
                 </SelectTrigger>
-                <SelectContent position="popper" className="p-2">
-                  <SelectItem value="FR" className="py-1 px-2">
-                    France (FR)
-                  </SelectItem>
-                  <SelectItem value="ES" className="py-1 px-2">
-                    Espagne (ES)
-                  </SelectItem>
-                  <SelectItem value="US" className="py-1 px-2">
-                    États-Unis (US)
-                  </SelectItem>
-                  <SelectItem value="BE" className="py-1 px-2">
-                    Belgique (BE)
-                  </SelectItem>
+                <SelectContent position="popper" className="min-w-32 p-2">
+                  {countries.map((item) => (
+                    <SelectItem
+                      key={`country-${item}`}
+                      value={item}
+                      className="py-1 px-2"
+                    >
+                      {item}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>

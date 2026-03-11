@@ -1,5 +1,5 @@
-import { Request, Response } from 'express';
-import { CampaignModel } from '@/models/campaign.model';
+import { Request, Response } from "express";
+import { CampaignModel } from "@/models/campaign.model";
 
 // Statistiques [cite: 45, 47]
 export const getStats = async (_req: Request, res: Response) => {
@@ -10,15 +10,15 @@ export const getStats = async (_req: Request, res: Response) => {
           _id: null,
           totalCampaigns: { $sum: 1 },
           activeCampaigns: {
-            $sum: { $cond: [{ $eq: ['$status', 'active'] }, 1, 0] },
+            $sum: { $cond: [{ $eq: ["$status", "active"] }, 1, 0] },
           },
-          totalImpressions: { $sum: '$impressionsServed' },
+          totalImpressions: { $sum: "$impressionsServed" },
         },
       },
     ]);
 
     const topAdvertiser = await CampaignModel.aggregate([
-      { $group: { _id: '$advertiser', count: { $sum: 1 } } },
+      { $group: { _id: "$advertiser", count: { $sum: 1 } } },
       { $sort: { count: -1 } },
       { $limit: 1 },
     ]);
@@ -29,9 +29,13 @@ export const getStats = async (_req: Request, res: Response) => {
         activeCampaigns: 0,
         totalImpressions: 0,
       }),
-      topAdvertiser: topAdvertiser[0]?._id || 'N/A',
+      topAdvertiser: topAdvertiser[0]?._id || "N/A",
     });
   } catch (error) {
-    res.status(500).json({ error: 'Stats calculation failed' });
+    if (error instanceof Error) {
+      res.status(500).json({ error: error.message });
+    } else {
+      res.status(500).json({ unknownError: error });
+    }
   }
 };

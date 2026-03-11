@@ -28,14 +28,23 @@ export const createCampaign = async (data: {
 };
 
 export const serveAd = async (country: string) => {
-  return await fetchJson(`${apiUrl}/api/serve-ad`, {
-    method: "POST",
-    body: JSON.stringify({ country }),
-  });
+  return await fetchJson<{ campaign: CampaignInterface }>(
+    `${apiUrl}/api/serve-ad`,
+    {
+      method: "POST",
+      body: JSON.stringify({ country }),
+    },
+  );
 };
 
 export const getCampaignById = async (id: string) => {
   return await fetchJson<{ campaign: CampaignInterface }>(
     `${apiUrl}/api/campaigns/${id}`,
+  );
+};
+
+export const getCountries = async () => {
+  return await fetchJson<{ countries: string[] }>(
+    `${apiUrl}/api/serve-ad/countries`,
   );
 };
