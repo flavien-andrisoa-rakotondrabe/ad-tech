@@ -1,12 +1,13 @@
-# 🧠 Journal de Bord Technique
+# Journal de Bord Technique
 
 Ce document répertorie les arbitrages techniques, les difficultés rencontrées et les solutions apportées lors du développement de la plateforme AdTech.
 
-## 🏗️ Arbitrages Techniques (Choix de Stack)
+## Arbitrages Techniques (Choix de Stack)
 
-### 1. Next.js 15 & Shadcn/ui (Frontend)
+### 1. Next.js 16 & Shadcn/ui (Frontend)
 
 - Décision : Utilisation du App Router pour le rendu côté serveur (SSR).
+
 - Raison : Le SSR permet d'afficher les statistiques et la liste des campagnes instantanément, améliorant l'expérience utilisateur (UX). Shadcn/ui a été choisi pour construire une interface "pixel-perfect" rapidement sans sacrifier l'accessibilité.
 
 ### 2. Express & TypeScript (Backend)
@@ -18,9 +19,10 @@ Ce document répertorie les arbitrages techniques, les difficultés rencontrées
 ### 3. MongoDB (Base de données)
 
 - Décision : Utilisation de MongoDB pour le stockage des campagnes.
+
 - Raison : La flexibilité des schémas NoSQL est idéale pour l'AdTech, où les critères de ciblage (pays, devices, types de médias) évoluent fréquemment.
 
-## 🛠️ Erreurs Rencontrées & Solutions
+## Erreurs Rencontrées & Solutions
 
 ### 1. Problème de Concurrence sur les Impressions
 
@@ -34,7 +36,7 @@ Ce document répertorie les arbitrages techniques, les difficultés rencontrées
 
 - Solution : Mise en place d'une validation stricte avec Zod côté frontend et backend pour transformer et normaliser les dates au format ISO avant la requête en base.
 
-## 🚀 Vision Produit & Scalabilité
+## Vision Produit & Scalabilité
 
 ### Capping d'Impressions
 
@@ -46,8 +48,6 @@ Pour éviter de saturer un utilisateur avec la même publicité, j'ai prévu dan
 
 - Cache de Lecture : Utilisation de Redis pour stocker les campagnes éligibles, réduisant la charge sur MongoDB de 90%.
 
-## 📹 Présentation Vidéo
+## Présentation Vidéo
 
-- Lien Loom :
-
-- Contenu : Démo du dashboard, création d'une campagne et explication du code de filtrage dans le backend.
+- Lien Loom : ()[https://]

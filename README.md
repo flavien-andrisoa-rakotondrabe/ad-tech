@@ -1,20 +1,20 @@
-# 🚀 AdTech Campaign Manager – Fullstack Challenge
+# AdTech Campaign Manager – Fullstack Challenge
 
 Ce projet est une plateforme de gestion et de diffusion de campagnes publicitaires vidéo. Il se compose d'une API REST robuste et d'une interface moderne pour piloter les performances publicitaires.
 
-## 🏗️ Architecture Technique
+## Architecture Technique
 
 L'application repose sur une architecture découplée pour garantir une séparation claire des responsabilités :
 
-- Frontend : Next.js 15 (App Router), TypeScript, Tailwind CSS, et Shadcn/ui pour une interface utilisateur réactive et professionnelle.
+- Frontend : Next.js 16 (App Router), TypeScript, Tailwind CSS, et Shadcn/ui pour une interface utilisateur réactive et professionnelle.
 
 - Backend : Node.js avec Express et TypeScript, offrant une API structurée et typée.
 
 - Base de données : MongoDB pour la flexibilité des schémas de données publicitaires.
 
-- Validation : Zod pour la validation des données d'entrée côté client et serveur.
+- Validation : Zod pour la validation des données d'entrée côté client et Express-validator côté serveur.
 
-### ⚙️ Installation et Lancement
+### Installation et Lancement
 
 Prérequis:
 
@@ -43,7 +43,7 @@ npm install
 npm run dev
 ```
 
-### 📈 Réflexions sur la Scalabilité (Partie 3)
+### Réflexions sur la Scalabilité
 
 Pour répondre aux contraintes de haute performance demandées dans l'exercice:
 
@@ -73,12 +73,10 @@ Pour assurer la stabilité et la disponibilité du système:
 
 - Monitoring : Intégrer des outils comme Prometheus/Grafana pour surveiller le taux d'erreur et la latence de l'API.
 
-### 🛠️ Améliorations possibles (Roadmap)
+### Améliorations possibles (Roadmap)
 
 Si j'avais disposé de plus de temps, j'aurais implémenté:
 
 - Tests Unitaires : Couverture complète avec Jest pour la logique de filtrage des campagnes.
 
 - Authentification : Sécurisation du dashboard via NextAuth ou Clerk.
-
-- Logs Structurés : Utilisation de Winston ou Pino pour un meilleur traçage des erreurs en production.
