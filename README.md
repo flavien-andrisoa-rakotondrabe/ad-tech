@@ -1,4 +1,4 @@
-# AdTech Campaign Manager – Fullstack Challenge
+# AdTech Campaign Manager
 
 Ce projet est une plateforme de gestion et de diffusion de campagnes publicitaires vidéo. Il se compose d'une API REST robuste et d'une interface moderne pour piloter les performances publicitaires.
 
