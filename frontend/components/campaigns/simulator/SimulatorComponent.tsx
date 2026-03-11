@@ -66,11 +66,7 @@ export default function SimulatorComponent() {
 
       toast.success("Simulation effectuée.");
     } catch (err: any) {
-      if (err.response?.status === 404) {
-        setError("Aucune campagne éligible trouvée pour ce pays actuellement.");
-      } else {
-        setError("Une erreur technique est survenue.");
-      }
+      setError("Aucune campagne éligible trouvée pour ce pays actuellement.");
     } finally {
       setLoading(false);
     }
@@ -174,7 +170,7 @@ export default function SimulatorComponent() {
         )}
 
         {error && (
-          <Alert variant="destructive">
+          <Alert variant="destructive" className="p-4 rounded-lg">
             <AlertCircle className="h-4 w-4" />
             <AlertTitle>Échec de diffusion</AlertTitle>
             <AlertDescription>{error}</AlertDescription>

@@ -9,9 +9,8 @@ export const serveAd = async (req: Request, res: Response) => {
     return;
   }
 
-  const now = new Date();
-
   try {
+    const now = new Date();
     const body = req.body as { country: string };
 
     // Recherche atomique d'une campagne éligible
