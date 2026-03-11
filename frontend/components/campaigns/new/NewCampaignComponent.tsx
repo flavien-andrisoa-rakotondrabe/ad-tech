@@ -36,9 +36,7 @@ const campaignSchema = z
       .date({ message: "Date de fin requise" })
       .refine((date) => date !== null, "Date de fin requise"),
     budget: z.coerce.number().positive("Le budget doit être supérieur à 0"),
-    targetCountries: z
-      .array(z.string())
-      .min(1, "Sélectionnez au moins un pays"),
+    targetCountries: z.array(z.string()).min(1, "Ajouter au moins un pays"),
   })
   .refine((data) => data.endDate > data.startDate, {
     message: "La date de fin doit être après la date de début",
